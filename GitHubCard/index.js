@@ -109,38 +109,20 @@ function master ({ aurl, name, login, loc, fowlrs, fowlng, url, bi }) {
 
 let cards = document.querySelector(".cards");
 
-// axios.get(`https://api.github.com/users/maxwellchrist`)
-//   .then(resp => {
-//     console.log(resp.data.login);
-//     resp.data.forEach(aurl, name, login, loc, fowlrs, fowlng, url, bi => {
-//       // const card = master ({ obj });
-//       // const card = master ({ aurl: resp.data.avatar_url, name: resp.data.name, 
-//       //                              login : resp.data.login, loc: resp.data.location, 
-//       //                              fowlrs: resp.data.followers, fowlng: resp.data.following, 
-//       //                              url: resp.data.html_url, bi: resp.data.bio });
-//       const card = master ({aurl, name, login, loc, fowlrs, fowlng, url, bi })
-//       cards.appendChild(card);
-//     })
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   })
-//   .finally(() => console.log("done"))
-
-  axios.get(`https://api.github.com/users/maxwellchrist`)
-  .then(resp => {
-    console.log(resp.data.login);
-    const card = master ({ aurl: resp.data.avatar_url, name: resp.data.name, 
-                                   login : resp.data.login, loc: resp.data.location, 
-                                   fowlrs: resp.data.followers, fowlng: resp.data.following, 
-                                   url: resp.data.html_url, bi: resp.data.bio });
-    cards.appendChild(card);
-  })
-  .catch(err => {
-    console.log(err);
-  })
-  .finally(() => console.log("done"))
-
+  // axios.get(`https://api.github.com/users/maxwellchrist`)
+  // .then(resp => {
+  //   console.log(resp.data.login);
+  //   // const card = master ({ obj });
+  //   const card = master ({ aurl: resp.data.avatar_url, name: resp.data.name, 
+  //                                  login : resp.data.login, loc: resp.data.location, 
+  //                                  fowlrs: resp.data.followers, fowlng: resp.data.following, 
+  //                                  url: resp.data.html_url, bi: resp.data.bio });
+  //   cards.appendChild(card);
+  // })
+  // .catch(err => {
+  //   console.log(err);
+  // })
+  // .finally(() => console.log("done"))
 
   /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -153,9 +135,6 @@ let cards = document.querySelector(".cards");
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
-
-
 /*
   List of LS Instructors Github username's:
     tetondan
@@ -164,3 +143,23 @@ const followersArray = [];
     luishrd
     bigknell
 */
+const followersArray = ["maxwellchrist", "tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+const followersCount = ( user ) => {
+  axios.get(`https://api.github.com/users/${user}`)
+  .then(resp => {
+      console.log(resp.data)
+      const card = master ({ aurl: resp.data.avatar_url, name: resp.data.name, 
+                                    login : resp.data.login, loc: resp.data.location, 
+                                    fowlrs: resp.data.followers, fowlng: resp.data.following, 
+                                    url: resp.data.html_url, bi: resp.data.bio });
+      cards.appendChild(card);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(() => console.log("done"))
+}
+
+for (let i = 0; i < followersArray.length; i++) {
+  followersCount(followersArray[i])
+}
