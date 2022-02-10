@@ -1,10 +1,10 @@
 import axios from 'axios';
 // console.log("this is a test for my first commit");
+let cards = document.querySelector(".cards");
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
-
     <div class="card">
       <img src={image url of user} />
       <div class="card-info">
@@ -21,8 +21,8 @@ import axios from 'axios';
     </div>
 */
 
-function master ({ aurl, name, login, loc, fowlrs, fowlng, url, bi }) {
-  // function master ({ obj }) {
+// function master ({ aurl, name, login, loc, fowlrs, fowlng, url, bi }) {
+  function master ( obj ) {
   const card = document.createElement("div");
   const image = document.createElement("img");
   const cardInfo = document.createElement("div");
@@ -51,27 +51,27 @@ function master ({ aurl, name, login, loc, fowlrs, fowlng, url, bi }) {
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
 
-  // image.src = obj.avatar_url;
-  // heading.textContent = obj.name;
-  // username.textContent = obj.login;
-  // location.textContent = `Location: ${obj.location}`;
-  // profile.textContent = "Profile";
-  // address.href = obj.html_url;
-  // address.textContent = obj.html_url;
-  // followers.textContent = `Followers: ${obj.followers}`;
-  // following.textContent = `Following: ${obj.following}`;
-  // bio.textContent = `Bio: ${obj.bio}`;
-
-  image.src = aurl;
-  heading.textContent = name;
-  username.textContent = login;
-  location.textContent = `Location: ${loc}`;
+  image.src = obj.avatar_url;
+  heading.textContent = obj.name;
+  username.textContent = obj.login;
+  location.textContent = `Location: ${obj.location}`;
   profile.textContent = "Profile";
-  address.href = url;
-  address.textContent = url;
-  followers.textContent = `Followers: ${fowlrs}`;
-  following.textContent = `Following: ${fowlng}`;
-  bio.textContent = `Bio: ${bi}`;
+  address.href = obj.html_url;
+  address.textContent = obj.html_url;
+  followers.textContent = `Followers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = `Bio: ${obj.bio}`;
+
+  // image.src = aurl;
+  // heading.textContent = name;
+  // username.textContent = login;
+  // location.textContent = `Location: ${loc}`;
+  // profile.textContent = "Profile";
+  // address.href = url;
+  // address.textContent = url;
+  // followers.textContent = `Followers: ${fowlrs}`;
+  // following.textContent = `Following: ${fowlng}`;
+  // bio.textContent = `Bio: ${bi}`;
 
   return card;
 }
@@ -98,7 +98,6 @@ function master ({ aurl, name, login, loc, fowlrs, fowlng, url, bi }) {
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
     data in order to use it to build your component function
-
     Skip to STEP 3 (line 34).
 */
 
@@ -106,8 +105,6 @@ function master ({ aurl, name, login, loc, fowlrs, fowlng, url, bi }) {
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
-
-let cards = document.querySelector(".cards");
 
   // axios.get(`https://api.github.com/users/maxwellchrist`)
   // .then(resp => {
@@ -130,7 +127,6 @@ let cards = document.querySelector(".cards");
     manually find some other users' github handles, or use the list found at the
     bottom of the page. Get at least 5 different Github usernames and add them as
     Individual strings to the friendsArray below.
-
     Using that array, iterate over it, requesting data for each user, creating a new card for each
     user, and adding that card to the DOM.
 */
@@ -144,15 +140,31 @@ let cards = document.querySelector(".cards");
     bigknell
 */
 const followersArray = ["maxwellchrist", "tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+// const followersCount = ( user ) => {
+//   axios.get(`https://api.github.com/users/${user}`)
+//   .then(resp => {
+//       console.log(resp.data)
+//       const card = master ({ aurl: resp.data.avatar_url, name: resp.data.name, 
+//                                     login : resp.data.login, loc: resp.data.location, 
+//                                     fowlrs: resp.data.followers, fowlng: resp.data.following, 
+//                                     url: resp.data.html_url, bi: resp.data.bio });
+//       cards.appendChild(card);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+//   .finally(() => console.log("done"))
+// }
+
+// for (let i = 0; i < followersArray.length; i++) {
+//   followersCount(followersArray[i])
+// }
+
 const followersCount = ( user ) => {
   axios.get(`https://api.github.com/users/${user}`)
   .then(resp => {
-      console.log(resp.data)
-      const card = master ({ aurl: resp.data.avatar_url, name: resp.data.name, 
-                                    login : resp.data.login, loc: resp.data.location, 
-                                    fowlrs: resp.data.followers, fowlng: resp.data.following, 
-                                    url: resp.data.html_url, bi: resp.data.bio });
-      cards.appendChild(card);
+      const userCard = master(resp.data); 
+      cards.appendChild(userCard);
   })
   .catch(err => {
     console.log(err);
@@ -161,5 +173,5 @@ const followersCount = ( user ) => {
 }
 
 for (let i = 0; i < followersArray.length; i++) {
-  followersCount(followersArray[i])
+  followersCount(followersArray[i]);
 }
