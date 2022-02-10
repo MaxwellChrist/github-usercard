@@ -1,10 +1,23 @@
-console.log("this is a test for my first commit");
+// console.log("this is a test for my first commit");
 
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+import axios from 'axios';
+axios.get(`https://api.github.com/users/maxwellchrist`)
+  .then(res => {
+    console.log(res)
+    console.log(res.data.login)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(() => console.log("done"))
+
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
