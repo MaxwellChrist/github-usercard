@@ -10,14 +10,12 @@ import axios from 'axios';
 axios.get(`https://api.github.com/users/maxwellchrist`)
   .then(res => {
     console.log(res)
-    console.log(res.data.login)
+    // console.log(res.data.login)
   })
   .catch(err => {
     console.log(err);
   })
   .finally(() => console.log("done"))
-
-
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -64,6 +62,41 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function master ({ obj }) {
+  const card = document.createElement("div");
+  const image = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const heading = document.createElement("h3");
+  const username = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const address = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  heading.classList.add("name");
+  username.classList.add("username");
+
+  card.appendChild(image);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(heading);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(address)
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  // image.src =obj
+
+  return card;
+}
+
 
 /*
   List of LS Instructors Github username's:
