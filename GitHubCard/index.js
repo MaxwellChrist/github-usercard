@@ -1,3 +1,5 @@
+console.log("this is a test for my first commit");
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
